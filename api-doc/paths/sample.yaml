@@ -1,0 +1,58 @@
+paths:
+  /stocks:
+    post:
+      summary: Stock Price
+      tags:
+        - Stocks
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/SampleReq"
+            example:
+              symbol: "aapl"
+              time: "year"
+              interval: 3
+      responses:
+        201:
+          description: Ok
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/SampleRes"
+              example:
+                anyString: "스트링"
+        400:
+          description: error
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+
+    get:
+      tags:
+        - Stocks
+      name: Stock Price
+      summary: Stock Price
+      parameters:
+        - name: query
+          in: query
+          schema: 
+            type: object
+            properties:
+              symbol: 
+                type: string
+              period:
+                type: string
+              interval:
+                type: int
+          example:
+              symbol: "aapl"
+              period: "year"
+              interval: 3
+      responses:
+        '200':
+          description: success
+        '404':
+          fail
